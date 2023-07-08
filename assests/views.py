@@ -16,12 +16,13 @@ def home(request):
     return redirect("company")
 
 
-class CompanyAll(generics.ListCreateAPIView):  # Accept Request get,post
+# ListCreateAPIView Accept Request get,post
+class CompanyAll(generics.ListCreateAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
 
-# Accept Request get, put, patch and delete
+# RetrieveUpdateDestroyAPIView Accept Request get, put, patch and delete
 class CompanyDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
@@ -55,6 +56,6 @@ def create_history_entry(sender, instance, created, **kwargs):
             device=instance, condition_status=instance.condition, last_update=instance.timestamp)
 
 
-class HistoryAll(generics.ListAPIView):
+class HistoryAll(generics.ListAPIView):  # ListAPIView Accept Request get
     queryset = History.objects.all()
     serializer_class = HistorySerializer

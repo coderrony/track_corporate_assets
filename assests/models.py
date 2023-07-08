@@ -14,7 +14,8 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField()
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="employee")
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
@@ -41,7 +42,8 @@ class Device(models.Model):
 
 
 class History(models.Model):
-    device = models.ForeignKey(Device, on_delete=models.Case)
+    device = models.ForeignKey(
+        Device, on_delete=models.Case, related_name="device")
     condition_status = models.CharField(max_length=10)
     last_update = models.CharField(max_length=20)
     created = models.DateTimeField(auto_now_add=True)
